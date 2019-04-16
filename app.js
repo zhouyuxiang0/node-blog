@@ -1,12 +1,25 @@
+const handleBlogRouter = require('./src/router/blog')
+const handleUserRouter = require('./src/router/user')
+
 const serverHandle = (req, res) => {
   // 设置返回格式
   res.setHeader('Content-type', 'application/json')
-
-  const resData = {
-    name: 'zzz',
-    site: 'xxxx'
+  
+  const blogData = handleBlogRouter(req, res)
+  if(blogData) {
+    res.end(
+      JSON.stringify(blogData)
+    )
+    return 
   }
-  res.end(JSON.stringify(resData))
+
+  const userData = handleUserRouter(res, req)
+  if(userData) {
+    res.end(
+      JSON.stringify(userData)
+    )
+  }
 }
 
 module.exports = serverHandle
+// process.env.NODE_ENV
