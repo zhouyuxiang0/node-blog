@@ -1,6 +1,5 @@
-const { getList } = require('../controller/blog')
+const { getList, getDetail } = require('../controller/blog')
 const { SuccessModel, ErrorModel } = require('../model/resModule')
-import {SuccessModel} from '../model/resModule'
 
 const handleBlogRouter = (req, res) => {
   const method = req.method
@@ -9,14 +8,13 @@ const handleBlogRouter = (req, res) => {
     const author = req.query.author || ''
     const keyword = req.query.keyword || ''
     const listData = getList(author, keyword)
-    console.log(SuccessModel)
-    // return new SuccessModel(listData)
+    return new SuccessModel(listData)
   }
 
   if(method === 'GET' && req.path === "/api/blog/detail") {
-    return {
-      msg: "博客详情接口"
-    }
+    const id = req.query.id
+    const data = getDetail(id)
+    return new SuccessModel(data)
   }
   
   if(method === 'POST' && req.path === "/api/blog/new") {
