@@ -27,7 +27,15 @@ const getDetail = (id) => {
   }
 }
 
+const newBlog = (blogData = {}) => {
+  // blogData 博客对象包含 title content
+  return {
+    id: 3
+  }
+}
+
 module.exports = {
   getList,
-  getDetail
+  getDetail,
+  newBlog
 }
